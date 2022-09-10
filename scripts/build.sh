@@ -9,4 +9,10 @@ if [ "$NAME" == "latest" ] ; then
     DOCKERFILE="python3.10"
 fi
 
-docker build -t "$use_tag" --file "./docker-images/${DOCKERFILE}.dockerfile" "./docker-images/"
+docker buildx use multiarch ||  docker buildx create --name multiarch --use
+
+docker buildx build \
+  --platform "linux/amd64,linux/arm64,linux/arm/v7" \
+  --file "./docker-images/${DOCKERFILE}.dockerfile" \
+  -t "$use_tag"  \
+  "./docker-images/"
