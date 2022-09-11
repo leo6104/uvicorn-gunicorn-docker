@@ -42,7 +42,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
       - name: Install Dependencies
-        run: python3.7 -m pip install docker pytest
+        run: python3.9 -m pip install docker pytest
       - name: Test Image
         run: bash scripts/test.sh
         env:
