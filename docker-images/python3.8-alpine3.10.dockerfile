@@ -2,10 +2,10 @@ FROM python:3.8-alpine3.10
 
 LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
 
+RUN apt-get update && apt-get upgrade -y && apt-get install -y gcc
+
 COPY requirements.txt /tmp/requirements.txt
-RUN apk add --no-cache --virtual .build-deps gcc libc-dev make \
-    && pip install --no-cache-dir -r /tmp/requirements.txt \
-    && apk del .build-deps gcc libc-dev make
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh

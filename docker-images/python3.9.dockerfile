@@ -2,6 +2,8 @@ FROM python:3.9
 
 LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
 
+RUN apt-get update && apt-get upgrade -y && apt-get install -y gcc
+
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
